@@ -22,7 +22,7 @@
     $password2 = $_POST['password2']      ?? '';
     $role      = $_POST['role']           ?? 'member';
 
-    // Server-side validation.
+    //server-side validation.
     $errors = [];
     if($name === '' || strlen($name) > 100){
         $errors[] = 'Name is required (max 100 characters).';

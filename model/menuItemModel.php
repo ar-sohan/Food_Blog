@@ -2,6 +2,33 @@
 
     require_once('db.php');
 
+     function getMenuItemsByRestaurant($restaurantId){
+        $con = getConnection();
+        $sql = "select id, restaurant_id, name, description, price, image_path, created_at
+                from menu_items where restaurant_id = ? order by name asc";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $restaurantId);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $rows = [];
+        while($row = mysqli_fetch_assoc($result)){
+            $rows[] = $row;
+        }
+        return $rows;
+    }
+
+      function getMenuItemById($id){
+        $con = getConnection();
+        $sql = "select id, restaurant_id, name, description, price, image_path, created_at
+                from menu_items where id = ? limit 1";
+        $stmt = mysqli_prepare($con, $sql);
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        return mysqli_fetch_assoc($result);
+    }
+
+
     function countMenuItems(){
         $con = getConnection();
         $result = mysqli_query($con, "select count(*) as c from menu_items");
