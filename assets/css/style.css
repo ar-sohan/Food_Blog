@@ -1,4 +1,4 @@
-/* ------- base ------- */
+/* base  */
 * { box-sizing: border-box; }
 body {
     margin: 0;
@@ -10,7 +10,7 @@ body {
 a { color: #c0392b; text-decoration: none; }
 a:hover { text-decoration: underline; }
 
-/* ------- header / nav (view/header.php) ------- */
+ /* header / nav (view/header.php)  */
 .site-header {
     background: #2c3e50;
     color: #fff;
@@ -31,14 +31,14 @@ a:hover { text-decoration: underline; }
 }
 .site-nav a:hover { color: #f1c40f; }
 
-/* ------- main wrapper (view/header.php) ------- */
+/* main wrapper (view/header.php) */
 .site-main {
     max-width: 1000px;
     margin: 20px auto;
     padding: 0 20px;
 }
 
-/* ------- home hero + buttons (view/home.php) ------- */
+/*home hero + buttons (view/home.php)*/
 .hero {
     background: #fff;
     padding: 30px;
@@ -60,7 +60,7 @@ a:hover { text-decoration: underline; }
 .btn-secondary { background: #7f8c8d; }
 .btn-secondary:hover { background: #626f70; }
 
-/* ------- forms (view/signup.php) ------- */
+/*forms (view/signup.php)*/
 form fieldset {
     border: 1px solid #ddd;
     padding: 16px 20px;
@@ -81,6 +81,7 @@ form label {
 form input[type=text],
 form input[type=email],
 form input[type=password],
+form input[type=file],
 form select {
     width: 100%;
     padding: 6px 8px;
@@ -100,59 +101,17 @@ form input[type=submit] {
     font-size: 1em;
 }
 form input[type=submit]:hover { background: #a93226; }
-
-/* ------- login (view/login.php) ------- */
-.form-container {
+form + p {
     max-width: 480px;
-    margin: 0 auto;
-}
-.form-container h2 {
+    margin: 20px auto 0;
     text-align: center;
-    margin-top: 0;
 }
-#loginForm {
-    border: 1px solid #ddd;
-    padding: 16px 20px;
-    border-radius: 6px;
-    background: #fff;
-}
-.form-group {
-    margin-top: 10px;
-}
-.remember-group {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-.remember-group label {
-    margin-top: 0;
-    font-weight: normal;
-}
-.btn-primary {
-    margin-top: 14px;
-    background: #c0392b;
-    color: #fff;
-    border: none;
-    padding: 8px 18px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 1em;
-}
-.btn-primary:hover {
-    background: #a93226;
-}
-.form-footer {
-    text-align: center;
-    margin-bottom: 0;
-}
-.error-msg {
-    color: #c0392b;
-    font-size: 0.92em;
-    margin-top: 4px;
-    display: block;
+.site-main:has(#signupForm) > h1 {
+    max-width: 480px;
+    margin: 32px auto 24px;
 }
 
-/* ------- flash + inline error (view/signup.php) ------- */
+/*flash + inline error (view/signup.php)*/
 .flash {
     background: #dff0d8;
     color: #3c763d;
@@ -166,7 +125,203 @@ form input[type=submit]:hover { background: #a93226; }
 .flash.error { background: #f2dede; color: #a94442; }
 .error { color: #c0392b; font-size: 0.92em; margin-top: 4px; }
 
-/* ------- footer (view/footer.php) ------- */
+/*checkbox label inline (view/login.php)*/
+.form-container {
+    max-width: 380px;
+    margin: 70px auto;
+    background: #fff;
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+.flash.error { background: #f2dede; color: #a94442; }
+.error { color: #c0392b; font-size: 0.92em; margin-top: 4px; }
+
+/* ------- checkbox label inline (view/login.php) ------- */
+form label.checkbox {
+    display: block;
+    margin-top: 12px;
+    font-weight: normal;
+}
+.form-container .form-group {
+    margin-top: 12px;
+}
+.form-container input[type=email],
+.form-container input[type=password] {
+    width: 100%;
+}
+
+/* ------- helpers ------- */
+.muted { color: #777; font-size: 0.92em; }
+.price { font-weight: bold; color: #2c3e50; }
+.item-hero {
+    max-width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+/* ------- profile card (view/profile.php) ------- */
+.profile-card {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    gap: 6px;
+}
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.85em;
+    text-align: center;
+}
+.btn-primary {
+    width: 100%;
+    margin-top: 16px;
+    background: #c0392b;
+    color: #fff;
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ------- reviews placeholder (Task 3 will style further, view/menuItem.php) ------- */
+.review-section {
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+/* ------- forms: textarea + file (admin forms) ------- */
+form textarea {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+}
+form input[type=number] {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}
+.btn-primary:hover { background: #a93226; }
+.form-footer {
+    text-align: center;
+}
+.stat-number {
+    font-size: 2.4em;
+    font-weight: bold;
+    color: #c0392b;
+    line-height: 1;
+}
+form label.checkbox {
+    display: block;
+    margin-top: 12px;
+    font-weight: normal;
+}
+form label.checkbox input { margin-right: 6px; }
+
+/*restaurant + menu card grid (view/restaurants.php, view/restaurantDetail.php)*/
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+}
+.card {
+    display: block;
+    background: #fff;
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    color: #222;
+}
+.card:hover { box-shadow: 0 3px 8px rgba(0,0,0,0.12); text-decoration: none; }
+.card h3 { margin: 6px 0; color: #c0392b; }
+.card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+/*helpers*/
+.muted { color: #777; font-size: 0.92em; }
+.price { font-weight: bold; color: #2c3e50; }
+.item-hero {
+    max-width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+/*profile card (view/profile.php)*/
+.profile-card {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-bottom: 20px;
+}
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.85em;
+    text-align: center;
+}
+.profile-pic.placeholder { border: 1px dashed #bbb; }
+.role-badge {
+    display: inline-block;
+    background: #2c3e50;
+    color: #fff;
+    border-radius: 4px;
+    padding: 1px 8px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/*reviews placeholder  ,view/menuItem.php */
+.review-section {
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+/* footer (view/footer.php) */
 .site-footer {
     text-align: center;
     color: #777;
