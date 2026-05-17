@@ -1,6 +1,7 @@
 <?php
     session_start();
     $pageTitle = "Home - Online Food Blog";
+    $extraScripts = ['../assets/js/search.js'];
     include('header.php');
 ?>
 
@@ -13,9 +14,11 @@
                 <a class="btn btn-secondary" href="login.php">Login</a>
             </p>
         <?php } else { ?>
-            <h3>Welcome back, <?= htmlspecialchars($_SESSION['name']) ?>!</h3>
+            <p>Welcome back, <?= htmlspecialchars($_SESSION['name']) ?>!</p>
         <?php } ?>
     </section>
+
+    <?php include('searchBox.php'); ?>
 
     <section class="quick-links">
         <h2>Get Started</h2>

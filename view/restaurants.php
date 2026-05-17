@@ -12,6 +12,7 @@
 
     $restaurants = getAllRestaurants();
     $pageTitle = "Restaurants - Online Food Blog";
+    $extraScripts = ['../assets/js/search.js'];
     include('header.php');
 ?>
 
