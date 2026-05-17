@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?= isset($pageTitle) ? htmlspecialchars($pageTitle) : 'Online Food Blog' ?></title>
-    <link rel="stylesheet" href="<?= isset($cssPath) ? $cssPath : '../css/style.css' ?>">
+    <link rel="stylesheet" href="<?= isset($cssPath) ? $cssPath : '../assets/css/style.css' ?>">
 </head>
 <body>
     <header class="site-header">
