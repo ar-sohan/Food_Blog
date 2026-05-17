@@ -13,7 +13,7 @@
                 <a class="btn btn-secondary" href="login.php">Login</a>
             </p>
         <?php } else { ?>
-            <p>Welcome back, <?= htmlspecialchars($_SESSION['name']) ?>!</p>
+            <h3>Welcome back, <?= htmlspecialchars($_SESSION['name']) ?>!</h3>
         <?php } ?>
     </section>
 
