@@ -135,9 +135,14 @@ form + p {
     border-radius: 6px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.08);
 }
-.form-container h2 {
-    text-align: center;
-    margin-top: 0;
+.flash.error { background: #f2dede; color: #a94442; }
+.error { color: #c0392b; font-size: 0.92em; margin-top: 4px; }
+
+/* ------- checkbox label inline (view/login.php) ------- */
+form label.checkbox {
+    display: block;
+    margin-top: 12px;
+    font-weight: normal;
 }
 .form-container .form-group {
     margin-top: 12px;
@@ -146,36 +151,88 @@ form + p {
 .form-container input[type=password] {
     width: 100%;
 }
-.remember-group {
+
+/* ------- helpers ------- */
+.muted { color: #777; font-size: 0.92em; }
+.price { font-weight: bold; color: #2c3e50; }
+.item-hero {
+    max-width: 100%;
+    max-height: 360px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+/* ------- profile card (view/profile.php) ------- */
+.profile-card {
     display: flex;
+    gap: 16px;
     align-items: center;
     gap: 6px;
 }
-.remember-group label {
-    margin-top: 0;
-    font-weight: normal;
+.profile-pic {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    background: #ecf0f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    font-size: 0.85em;
+    text-align: center;
 }
 .btn-primary {
     width: 100%;
     margin-top: 16px;
     background: #c0392b;
     color: #fff;
-    border: none;
-    padding: 8px 18px;
     border-radius: 4px;
-    cursor: pointer;
+    padding: 1px 8px;
+    font-size: 0.8em;
+    text-transform: uppercase;
+    margin-top: 4px;
+}
+
+/* ------- reviews placeholder (Task 3 will style further, view/menuItem.php) ------- */
+.review-section {
+    background: #fff;
+    padding: 16px;
+    border-radius: 6px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    margin-top: 20px;
+}
+
+/* ------- forms: textarea + file (admin forms) ------- */
+form textarea {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+    min-height: 80px;
+    resize: vertical;
+    font-family: inherit;
+}
+form input[type=number] {
+    width: 100%;
+    padding: 6px 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     font-size: 1em;
 }
 .btn-primary:hover { background: #a93226; }
 .form-footer {
     text-align: center;
-    margin-bottom: 0;
 }
-.error-msg {
+.stat-number {
+    font-size: 2.4em;
+    font-weight: bold;
     color: #c0392b;
-    font-size: 0.92em;
-    margin-top: 4px;
-    display: block;
+    line-height: 1;
 }
 form label.checkbox {
     display: block;
