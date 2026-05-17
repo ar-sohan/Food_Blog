@@ -36,5 +36,11 @@
         }
         return 0;
     }
-
+function loginUser($email, $password){
+    $user = findUserByEmail($email);
+    if($user && password_verify($password, $user['password_hash'])){
+        return $user;
+    }
+    return null;
+}
 ?>
