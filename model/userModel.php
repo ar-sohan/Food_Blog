@@ -2,9 +2,8 @@
 
     require_once('db.php');
 
-    // ----- READ ---------------------------------------------------------
-
-    // Look up a single user by email. Returns the row as an assoc array, or NULL.
+    
+    // look for single user by email. returns the row as an assoc array, or NULL.
     function findUserByEmail($email){
         $con = getConnection();
         $sql = "select id, name, email, password_hash, role, profile_picture
@@ -16,7 +15,7 @@
         return mysqli_fetch_assoc($result);
     }
 
-    // Look up a single user by id.
+    // look fora single user by id.
     function findUserById($id){
         $con = getConnection();
         $sql = "select id, name, email, password_hash, role, profile_picture
@@ -28,7 +27,7 @@
         return mysqli_fetch_assoc($result);
     }
 
-    // Remember-Me cookie lookup. The cookie carries a raw token; the DB stores
+    // remember-me cookie lookup. this cookie carries a raw token; the DB stores
     // its sha256 hash so a leaked DB row can't be used to forge a cookie.
     function findUserByRememberToken($rawToken){
         $hash = hash('sha256', $rawToken);
@@ -41,7 +40,7 @@
         return mysqli_fetch_assoc($result);
     }
 
-    // Convenience helper for signup validation + AJAX uniqueness check.
+    // convenience helper for signup validation + AJAX uniqueness check.
     function emailExists($email){
         return findUserByEmail($email) !== null;
     }
@@ -57,7 +56,7 @@
         return mysqli_fetch_assoc($result) !== null;
     }
 
-    // ----- WRITE --------------------------------------------------------
+    
 
     // Insert a new user. Returns the new user id on success, 0 on failure.
     function addUser($user){
