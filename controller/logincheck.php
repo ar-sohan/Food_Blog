@@ -2,16 +2,23 @@
     if(session_status() === PHP_SESSION_NONE){
         session_start();
     }
-
     require_once(__DIR__ . '/../model/userModel.php');
 
-    if($_SERVER['REQUEST_METHOD'] !== 'POST'){
+    if(!isset($_POST['submit'])){
+        header('location: ../view/login.php');
+        exit;
+    }
+
+    // CSRF check
+    if(!isset($_POST['csrf'], $_SESSION['csrf']) || !hash_equals($_SESSION['csrf'], $_POST['csrf'])){
+        $_SESSION['flash'] = ['type'=>'error', 'msg'=>'Invalid request. Please reload and try again.'];
         header('location: ../view/login.php');
         exit;
     }
 
     $email    = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $password = $_POST['password']    ?? '';
+    $remember = isset($_POST['remember']);
 
     $errors = [];
     if($email === '' || !filter_var($email, FILTER_VALIDATE_EMAIL)){
@@ -23,25 +30,39 @@
 
     if(!empty($errors)){
         $_SESSION['errors'] = $errors;
-        $_SESSION['old'] = ['email' => $email];
+        $_SESSION['old']    = ['email'=>$email];
         header('location: ../view/login.php');
         exit;
     }
 
-    $user = loginUser($email, $password);
-
-    if($user){
-        session_regenerate_id(true);
-
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['name'] = $user['name'];
-        $_SESSION['role'] = $user['role'];
-
-        header('location: ../view/home.php');
+    $user = findUserByEmail($email);
+    if(!$user || !password_verify($password, $user['password_hash'])){
+        $_SESSION['flash'] = ['type'=>'error', 'msg'=>'Invalid email or password.'];
+        $_SESSION['old']   = ['email'=>$email];
+        header('location: ../view/login.php');
         exit;
     }
 
-    $_SESSION['flash'] = ['type' => 'error', 'msg' => 'Invalid email or password.'];
-    $_SESSION['old'] = ['email' => $email];
-    header('location: ../view/login.php');
+    // Login successful - set the session.
+    session_regenerate_id(true);
+    $_SESSION['user_id'] = (int)$user['id'];
+    $_SESSION['name']    = $user['name'];
+    $_SESSION['role']    = $user['role'];
+
+    // Remember Me - mint a raw token, store the sha256 hash, set 30-day cookie.
+    if($remember){
+        $rawToken = bin2hex(random_bytes(32));
+        setUserRememberToken($user['id'], $rawToken);
+        setcookie(
+            'remember_token',
+            $rawToken,
+            time() + 30 * 24 * 60 * 60,
+            '/',
+            '',
+            false, // set to true if you serve over HTTPS
+            true   // HttpOnly
+        );
+    }
+
+    header('location: ../view/home.php');
     exit;
