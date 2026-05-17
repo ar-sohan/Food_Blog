@@ -43,13 +43,13 @@
         exit;
     }
 
-    // Login successful - set the session.
+    //session set - login successful
     session_regenerate_id(true);
     $_SESSION['user_id'] = (int)$user['id'];
     $_SESSION['name']    = $user['name'];
     $_SESSION['role']    = $user['role'];
 
-    // Remember Me - mint a raw token, store the sha256 hash, set 30-day cookie.
+    //remember Me-create a  token(rawtoken), store sha256 hash,  30-day cookie.
     if($remember){
         $rawToken = bin2hex(random_bytes(32));
         setUserRememberToken($user['id'], $rawToken);
@@ -59,7 +59,7 @@
             time() + 30 * 24 * 60 * 60,
             '/',
             '',
-            false, // set to true if you serve over HTTPS
+            false, // set to true if serve over HTTPS
             true   // HttpOnly
         );
     }
