@@ -2,18 +2,38 @@
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
+
+    $flash  = $_SESSION['flash']  ?? null;
+    $errors = $_SESSION['errors'] ?? [];
+    $old    = $_SESSION['old']    ?? [];
+    unset($_SESSION['flash'], $_SESSION['errors'], $_SESSION['old']);
+
     $pageTitle = "Login - Online Food Blog";
     include('header.php');
 ?>
 
     <div class="form-container">
         <h2>Login</h2>
-        <!-- <?php include('../flash.php'); ?> -->
 
-        <form action="login.php" method="POST" id="loginForm">
+        <?php if($flash){ ?>
+            <div class="flash <?= $flash['type'] === 'error' ? 'error' : '' ?>">
+                <?= htmlspecialchars($flash['msg']) ?>
+            </div>
+        <?php } ?>
+
+        <?php if(!empty($errors)){ ?>
+            <div class="flash error">
+                <?php foreach($errors as $e){ ?>
+                    <div><?= htmlspecialchars($e) ?></div>
+                <?php } ?>
+            </div>
+        <?php } ?>
+
+        <form action="../controller/logincheck.php" method="POST" id="loginForm">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Enter your email">
+                <input type="email" name="email" id="email" placeholder="Enter your email"
+                       value="<?= htmlspecialchars($old['email'] ?? '') ?>">
                 <span class="error-msg" id="emailError"></span>
             </div>
             <div class="form-group">
@@ -31,4 +51,3 @@
     </div>
 
 <?php include('footer.php'); ?>
-
