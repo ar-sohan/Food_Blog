@@ -57,6 +57,7 @@ CREATE TABLE IF NOT EXISTS food_experience_posts (
     user_id INT NOT NULL,
     title VARCHAR(200) NOT NULL,
     content TEXT NOT NULL,
+    image_path VARCHAR(255) DEFAULT NULL,
     post_type ENUM('restaurant','food','both') NOT NULL,
     restaurant_id INT NULL,
     menu_item_id INT NULL,

@@ -16,6 +16,7 @@
     $cssPath         = '../../assets/css/style.css';
     $homePath        = '../home.php';
     $restaurantsPath = '../restaurants.php';
+    $blogPath        = '../blog.php';
     $loginPath       = '../login.php';
     $signupPath      = '../signup.php';
     $adminPath       = 'dashboard.php';

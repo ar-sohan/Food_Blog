@@ -26,6 +26,7 @@
                 <a href="<?= isset($loginPath) ? $loginPath : 'login.php' ?>">Login</a>
                 <a href="<?= isset($signupPath) ? $signupPath : 'signup.php' ?>">Signup</a>
             <?php } else { ?>
+                <a href="<?= isset($blogPath) ? $blogPath : 'blog.php' ?>">Blog</a>
                 <?php if($role === 'admin'){ ?>
                     <a href="<?= isset($adminPath) ? $adminPath : 'admin/dashboard.php' ?>">Admin</a>
                 <?php } ?>

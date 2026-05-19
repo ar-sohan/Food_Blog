@@ -26,6 +26,9 @@
             <li><a href="restaurants.php">Browse all restaurants</a></li>
             <?php if(!isset($_SESSION['user_id'])){ ?>
                 <li><a href="signup.php">Create a member account</a> to post reviews</li>
+            <?php } else { ?>
+                <li><a href="blog.php">Read member blogs</a></li>
+                <li><a href="blogCreate.php">Write a blog</a></li>
             <?php } ?>
         </ul>
     </section>
