@@ -25,6 +25,8 @@
     $loggedIn   = isset($_SESSION['user_id']);
     $isMember   = $loggedIn && ($_SESSION['role'] ?? '') === 'member';
     $currentUid = $loggedIn ? (int)$_SESSION['user_id'] : 0;
+    $flash      = $_SESSION['flash'] ?? null;
+    unset($_SESSION['flash']);
 
     $pageTitle = htmlspecialchars($item['name']) . " - Online Food Blog";
     $extraScripts = ['../assets/reviews.js'];
@@ -32,6 +34,12 @@
 ?>
 
     <h1><?= htmlspecialchars($item['name']) ?></h1>
+    <?php if($flash){ ?>
+        <div class="flash <?= $flash['type'] === 'error' ? 'error' : '' ?>">
+            <?= htmlspecialchars($flash['msg']) ?>
+        </div>
+    <?php } ?>
+
     <?php if($restaurant){ ?>
         <p class="muted">
             From <a href="restaurantDetail.php?id=<?= (int)$restaurant['id'] ?>"><?= htmlspecialchars($restaurant['name']) ?></a>
@@ -77,14 +85,17 @@
         </p>
 
         <?php if($isMember){ ?>
-            <form id="reviewForm" novalidate>
+            <form id="reviewForm" action="../controller/apiReviewAdd.php" method="POST" novalidate>
                 <fieldset>
                     <legend>Post a Review</legend>
+                    <input type="hidden" name="menu_item_id" value="<?= (int)$item['id'] ?>">
+                    <input type="hidden" name="csrf" value="<?= htmlspecialchars($_SESSION['csrf']) ?>">
+
                     <label for="reviewName">Posting as</label>
                     <input type="text" id="reviewName" value="<?= htmlspecialchars($_SESSION['name']) ?>" readonly>
 
                     <label for="reviewComment">Your review (max 1000 characters)</label>
-                    <textarea id="reviewComment" maxlength="1000" required></textarea>
+                    <textarea id="reviewComment" name="comment" maxlength="1000" required></textarea>
 
                     <div id="reviewError" class="error"></div>
                     <input type="submit" value="Post Review">

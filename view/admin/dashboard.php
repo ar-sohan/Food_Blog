@@ -43,7 +43,7 @@
         </div>
         <div class="stat-card">
             <div class="stat-number"><?= $foodExpCount ?></div>
-            <div class="stat-label">Food Experience Posts</div>
+            <div class="stat-label">Blogs</div>
         </div>
     </div>
 
@@ -51,6 +51,7 @@
     <p>
         <a class="btn" href="restaurants.php">Restaurants &amp; Menus</a>
         <a class="btn btn-secondary" href="restaurantCreate.php">+ Add Restaurant</a>
+        <a class="btn btn-secondary" href="../blogCreate.php">+ Write Blog</a>
     </p>
 
 <?php include('../footer.php'); ?>
